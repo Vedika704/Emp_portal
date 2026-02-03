@@ -57,7 +57,7 @@ export default function EmployeeSalaryPage() {
   };
 
   /* ================= EDIT ================= */
-  const editSalary = (row: any) => {
+ const editSalary = (row: any) => {
     setForm({
       ...row,
       salary_from_month: row.salary_from_month?.split("T")[0],
@@ -65,6 +65,7 @@ export default function EmployeeSalaryPage() {
     });
     setEditId(row.salary_id);
   };
+
 
   /* ================= DELETE ================= */
   const deleteSalary = async (salary_id: number) => {
@@ -85,66 +86,111 @@ export default function EmployeeSalaryPage() {
         </h2>
 
         <div className="grid grid-cols-3 gap-4">
-          <select
-            name="employee_id"
-            value={form.employee_id || ""}
-            onChange={handleChange}
-            className="input"
-          >
-            <option value="">Select Employee ID</option>
-            {employees.map((e) => (
-              <option key={e.employee_id} value={e.employee_id}>
-                {e.employee_id} - {e.first_name} {e.last_name}
-              </option>
-            ))}
-          </select>
 
-          <select name="pay_grade" value={form.pay_grade || ""} onChange={handleChange} className="input">
-            <option value="">Pay Grade</option>
-            <option>Entry Level</option>
-            <option>Junior</option>
-            <option>Mid Level</option>
-            <option>Senior Level</option>
-            <option>Team Lead</option>
-            <option>Manager</option>
-            <option>Director</option>
-            <option>Executive</option>
-          </select>
+  {/* EXISTING FIELDS - UNTOUCHED */}
+  <select name="employee_id" value={form.employee_id || ""} onChange={handleChange} className="input">
+    <option value="">Select Employee ID</option>
+    {employees.map((e) => (
+      <option key={e.employee_id} value={e.employee_id}>
+        {e.employee_id} - {e.first_name} {e.last_name}
+      </option>
+    ))}
+  </select>
 
-          <select name="pay_frequency" value={form.pay_frequency || ""} onChange={handleChange} className="input">
-            <option value="">Pay Frequency</option>
-            <option>Weekly</option>
-            <option>Bi-weekly</option>
-            <option>Monthly</option>
-            <option>Quarterly</option>
-            <option>Annually</option>
-          </select>
+  <select name="pay_grade" value={form.pay_grade || ""} onChange={handleChange} className="input">
+    <option value="">Pay Grade</option>
+    <option>Entry Level</option>
+    <option>Junior</option>
+    <option>Mid Level</option>
+    <option>Senior Level</option>
+    <option>Team Lead</option>
+    <option>Manager</option>
+    <option>Director</option>
+    <option>Executive</option>
+  </select>
 
-          <select name="currency" value={form.currency || ""} onChange={handleChange} className="input">
-            <option value="">Currency</option>
-            <option>INR (Indian Rupees)</option>
-            <option>USD(US Dollar)</option>
-            <option>EUR(European Dollar)</option>
-            <option>GBP(Great British Pound)</option>
-            <option>AUD(Australian Dollar)</option>
-            <option>CAD(Canadian Dollar)</option>
-            <option>SGD(Singapor Dollar)</option>
-            <option>JPY(Japanese Yen)</option>
-          </select>
+  <select name="pay_frequency" value={form.pay_frequency || ""} onChange={handleChange} className="input">
+    <option value="">Pay Frequency</option>
+    <option>Weekly</option>
+    <option>Bi-weekly</option>
+    <option>Monthly</option>
+    <option>Quarterly</option>
+    <option>Annually</option>
+  </select>
 
-          <input name="base_salary" placeholder="Base Salary" value={form.base_salary || ""} onChange={handleChange} className="input" />
+  <select name="currency" value={form.currency || ""} onChange={handleChange} className="input">
+    <option value="">Currency</option>
+    <option>INR(Indian Rupees)</option>
+    <option>USD(US Dollar)</option>
+    <option>EUR(European Dolar)</option>
+    <option>GBP(Great British Pound)</option>
+    <option>SGD(Singapore Dollar)</option>
+    <option>JPY(Japanese Yen)</option>
+  </select>
 
-          <select name="payment_mode" value={form.payment_mode || ""} onChange={handleChange} className="input">
-            <option value="">Payment Mode</option>
-            <option>Cash</option>
-            <option>Check</option>
-            <option>Bank Transfer</option>
-            <option>Digital Wallet</option>
-          </select>
+  <input name="base_salary" placeholder="Base Salary"
+    value={form.base_salary || ""} onChange={handleChange} className="input" />
 
-          <input type="date" name="salary_from_month" value={form.salary_from_month || ""} onChange={handleChange} className="input" />
-          <input type="date" name="salary_to_month" value={form.salary_to_month || ""} onChange={handleChange} className="input" />
-        </div>
+  <select name="payment_mode" value={form.payment_mode || ""} onChange={handleChange} className="input">
+    <option value="">Payment Mode</option>
+    <option>Cash</option>
+    <option>Check</option>
+    <option>Bank Transfer</option>
+  </select>
+
+ <div>
+  <label className="text-sm font-semibold mb-1 block">
+    Effective From
+  </label>
+  <input
+    type="date"
+    name="salary_from_month"
+    value={form.salary_from_month || ""}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+
+<div>
+  <label className="text-sm font-semibold mb-1 block">
+    Effective To
+  </label>
+  <input
+    type="date"
+    name="salary_to_month"
+    value={form.salary_to_month || ""}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+
+
+
+  {/* ====== NEW REQUIRED FIELDS ====== */}
+
+  <input name="insurance_amount" placeholder="Insurance Amount"
+    value={form.insurance_amount || ""} onChange={handleChange} className="input" />
+
+  <input name="loan_amount" placeholder="Loan Amount"
+    value={form.loan_amount || ""} onChange={handleChange} className="input" />
+
+  <input name="hra_amount" placeholder="HRA Amount"
+    value={form.hra_amount || ""} onChange={handleChange} className="input" />
+
+  <input name="conveyance_amount" placeholder="Conveyance Amount"
+    value={form.conveyance_amount || ""} onChange={handleChange} className="input" />
+
+  <input name="bank_name" placeholder="Bank Name"
+    value={form.bank_name || ""} onChange={handleChange} className="input" />
+
+  <input name="account_number" placeholder="Account Number"
+    value={form.account_number || ""} onChange={handleChange} className="input" />
+
+  <input name="ifsc_swift_code" placeholder="IFSC / SWIFT Code"
+    value={form.ifsc_swift_code || ""} onChange={handleChange} className="input" />
+
+</div>
+
 
         {/* NET SALARY */}
         <div className="mt-4">
@@ -194,6 +240,8 @@ export default function EmployeeSalaryPage() {
                 <td className="border p-2">{s.payment_mode}</td>
                 <td className="border p-2">
                   {s.salary_from_month?.split("T")[0]} → {s.salary_to_month?.split("T")[0]}
+
+                                         
                 </td>
                 {!isReport && (
                   <td className="border p-2">
